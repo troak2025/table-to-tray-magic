@@ -2,6 +2,16 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  animation: pageEnter 0.4s ease-out;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .header {
@@ -15,11 +25,35 @@
   font-weight: 700;
   color: var(--foreground);
   margin: 0;
+  animation: slideFromLeft 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .headerInfo p {
   color: var(--muted-foreground);
   margin: 0;
+  animation: fadeUp 0.5s ease 0.1s backwards;
+}
+
+@keyframes slideFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .addButton {
@@ -61,14 +95,29 @@
   font-size: 0.875rem;
   font-weight: 500;
   white-space: nowrap;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   border: none;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.categoryButton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0);
+  transition: background 0.2s ease;
+}
+
+.categoryButton:hover::after {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .categoryButtonActive {
   background-color: var(--primary);
   color: var(--primary-foreground);
+  box-shadow: 0 4px 12px -2px rgba(249, 115, 22, 0.4);
 }
 
 .categoryButtonInactive {
@@ -78,6 +127,7 @@
 
 .categoryButtonInactive:hover {
   background-color: rgba(var(--muted-rgb, 226, 232, 240), 0.8);
+  transform: translateY(-1px);
 }
 
 .searchWrapper {
@@ -135,12 +185,46 @@
   background-color: var(--card);
   padding: 1rem;
   box-shadow: var(--shadow-card);
-  transition: all 0.2s ease;
-  animation: scaleIn 0.2s ease-out;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: menuCardEnter 0.4s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.menuCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.menuCard:hover::before {
+  left: 100%;
 }
 
 .menuCard:hover {
-  box-shadow: var(--shadow-elevated);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+}
+
+@keyframes menuCardEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 .menuCard:hover .menuButton {
@@ -163,6 +247,11 @@
   align-items: center;
   justify-content: center;
   font-size: 2.5rem;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.menuCard:hover .imagePlaceholder {
+  transform: scale(1.2) rotate(5deg);
 }
 
 .unavailableOverlay {
@@ -228,6 +317,11 @@
   font-weight: 700;
   color: var(--primary);
   margin: 0;
+  transition: transform 0.2s ease;
+}
+
+.menuCard:hover .menuPrice {
+  transform: scale(1.05);
 }
 
 /* Dropdown Menu */

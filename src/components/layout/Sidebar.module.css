@@ -106,6 +106,25 @@
   justify-content: center;
   border-radius: 0.5rem;
   background: var(--gradient-warm);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.3s ease;
+  animation: logoEnter 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.logoWrapper:hover {
+  transform: rotate(10deg) scale(1.1);
+  box-shadow: 0 0 20px rgba(249, 115, 22, 0.4);
+}
+
+@keyframes logoEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-180deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
 }
 
 /* Navigation */
@@ -128,14 +147,34 @@
   padding: 0.625rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 500;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
   color: rgba(var(--sidebar-foreground-rgb, 248, 250, 252), 0.7);
+  position: relative;
+  overflow: hidden;
+}
+
+.navLink::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: var(--gradient-warm);
+  border-radius: 0 3px 3px 0;
+  transition: height 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navLink:hover {
   background-color: var(--sidebar-accent);
   color: var(--sidebar-foreground);
+  transform: translateX(4px);
+}
+
+.navLink:hover::before {
+  height: 60%;
 }
 
 .navLinkActive {
@@ -143,9 +182,18 @@
   color: var(--sidebar-primary-foreground);
 }
 
+.navLinkActive::before {
+  height: 70%;
+}
+
 .navIcon {
   height: 1.25rem;
   width: 1.25rem;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.navLink:hover .navIcon {
+  transform: scale(1.15);
 }
 
 /* User Section */
@@ -170,6 +218,14 @@
   background-color: var(--sidebar-accent);
   font-size: 0.875rem;
   font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+}
+
+.userAvatar:hover {
+  background: var(--gradient-warm);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.3);
 }
 
 .userInfo {

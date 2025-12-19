@@ -21,7 +21,11 @@ export function PopularItems() {
 
       <div className={styles.itemsList}>
         {mockItems.map((item, index) => (
-          <div key={item.id} className={styles.item}>
+          <div 
+            key={item.id} 
+            className={styles.item}
+            style={{ animationDelay: `${0.2 + index * 0.1}s` }}
+          >
             <div className={styles.itemHeader}>
               <div className={styles.itemInfo}>
                 <span className={styles.rank}>

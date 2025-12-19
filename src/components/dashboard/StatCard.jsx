@@ -1,12 +1,15 @@
 import { TrendingUp, TrendingDown } from "lucide-react";
 import styles from "./StatCard.module.css";
 
-export function StatCard({ title, value, change, icon: Icon, className }) {
+export function StatCard({ title, value, change, icon: Icon, className, index = 0 }) {
   const isPositive = change && change > 0;
   const isNegative = change && change < 0;
 
   return (
-    <div className={`${styles.card} ${className || ""}`.trim()}>
+    <div 
+      className={`${styles.card} ${className || ""}`.trim()}
+      style={{ animationDelay: `${index * 0.1}s` }}
+    >
       <div className={styles.content}>
         <div className={styles.info}>
           <p className={styles.title}>{title}</p>

@@ -30,24 +30,28 @@ export default function Dashboard() {
           value="$4,829"
           change={12.5}
           icon={DollarSign}
+          index={0}
         />
         <StatCard
           title="Orders Today"
           value="156"
           change={8.2}
           icon={ShoppingBag}
+          index={1}
         />
         <StatCard
           title="Active Orders"
           value="23"
           change={-3.1}
           icon={Clock}
+          index={2}
         />
         <StatCard
           title="Avg. Order Value"
           value="$30.95"
           change={5.7}
           icon={TrendingUp}
+          index={3}
         />
       </div>
 

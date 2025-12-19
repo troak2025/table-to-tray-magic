@@ -2,6 +2,16 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  animation: containerFadeIn 0.5s ease-out;
+}
+
+@keyframes containerFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .header {
@@ -23,6 +33,18 @@
   font-weight: 700;
   color: var(--foreground);
   margin: 0;
+  animation: titleSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes titleSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @media (min-width: 640px) {
@@ -35,6 +57,18 @@
   font-size: 0.875rem;
   color: var(--muted-foreground);
   margin: 0;
+  animation: subtitleFadeIn 0.5s ease-out 0.1s backwards;
+}
+
+@keyframes subtitleFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (min-width: 640px) {
@@ -46,6 +80,16 @@
 .date {
   font-size: 0.75rem;
   color: var(--muted-foreground);
+  animation: dateFadeIn 0.5s ease-out 0.15s backwards;
+}
+
+@keyframes dateFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @media (min-width: 640px) {

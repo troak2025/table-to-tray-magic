@@ -2,6 +2,16 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  animation: pageEnter 0.4s ease-out;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .header {
@@ -15,11 +25,35 @@
   font-weight: 700;
   color: var(--foreground);
   margin: 0;
+  animation: slideFromLeft 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .headerInfo p {
   color: var(--muted-foreground);
   margin: 0;
+  animation: fadeUp 0.5s ease 0.1s backwards;
+}
+
+@keyframes slideFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .filterButton {
@@ -61,14 +95,29 @@
   font-size: 0.875rem;
   font-weight: 500;
   white-space: nowrap;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   border: none;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.statusButton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0);
+  transition: background 0.2s ease;
+}
+
+.statusButton:hover::after {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .statusButtonActive {
   background-color: var(--primary);
   color: var(--primary-foreground);
+  box-shadow: 0 4px 12px -2px rgba(249, 115, 22, 0.4);
 }
 
 .statusButtonInactive {
@@ -78,6 +127,7 @@
 
 .statusButtonInactive:hover {
   background-color: rgba(var(--muted-rgb, 226, 232, 240), 0.8);
+  transform: translateY(-1px);
 }
 
 .searchWrapper {
@@ -118,12 +168,43 @@
   background-color: var(--card);
   padding: 1.5rem;
   box-shadow: var(--shadow-card);
-  transition: all 0.2s ease;
-  animation: slideUp 0.4s ease-out;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: orderCardEnter 0.4s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.orderCard::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--gradient-warm);
+  transform: scaleY(0);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 4px 0 0 4px;
+}
+
+.orderCard:hover::before {
+  transform: scaleY(1);
 }
 
 .orderCard:hover {
-  box-shadow: var(--shadow-elevated);
+  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.12);
+  transform: translateX(4px);
+}
+
+@keyframes orderCardEnter {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .orderContent {
@@ -153,11 +234,30 @@
   align-items: center;
   justify-content: center;
   border-radius: 0.75rem;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.orderCard:hover .statusIconWrapper {
+  transform: scale(1.1) rotate(-5deg);
 }
 
 .statusIcon {
   height: 1.5rem;
   width: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.orderCard:hover .statusIcon {
+  animation: iconPulse 0.6s ease;
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
 }
 
 .orderDetails h3 {
@@ -201,6 +301,12 @@
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--card-foreground);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.orderCard:hover .orderTotal {
+  transform: scale(1.05);
+  color: var(--primary);
 }
 
 .statusBadge {
@@ -208,6 +314,12 @@
   align-items: center;
   gap: 0.25rem;
   border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.statusBadge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Status Colors */

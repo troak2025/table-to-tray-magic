@@ -2,6 +2,16 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  animation: pageEnter 0.4s ease-out;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .header {
@@ -15,11 +25,35 @@
   font-weight: 700;
   color: var(--foreground);
   margin: 0;
+  animation: slideFromLeft 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .headerInfo p {
   color: var(--muted-foreground);
   margin: 0;
+  animation: fadeUp 0.5s ease 0.1s backwards;
+}
+
+@keyframes slideFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .addButton {
@@ -39,7 +73,24 @@
   background-color: rgba(var(--destructive-rgb, 239, 68, 68), 0.1);
   border: 1px solid rgba(var(--destructive-rgb, 239, 68, 68), 0.2);
   padding: 1rem;
-  animation: fadeIn 0.3s ease-out;
+  animation: alertShake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  transition: transform 0.2s ease;
+}
+
+.lowStockAlert:hover {
+  transform: scale(1.01);
+}
+
+@keyframes alertShake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-2px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(2px);
+  }
 }
 
 .alertContent {
@@ -94,14 +145,29 @@
   font-size: 0.875rem;
   font-weight: 500;
   white-space: nowrap;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   border: none;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.categoryButton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0);
+  transition: background 0.2s ease;
+}
+
+.categoryButton:hover::after {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .categoryButtonActive {
   background-color: var(--primary);
   color: var(--primary-foreground);
+  box-shadow: 0 4px 12px -2px rgba(249, 115, 22, 0.4);
 }
 
 .categoryButtonInactive {
@@ -111,6 +177,7 @@
 
 .categoryButtonInactive:hover {
   background-color: rgba(var(--muted-rgb, 226, 232, 240), 0.8);
+  transform: translateY(-1px);
 }
 
 .searchWrapper {
@@ -144,6 +211,18 @@
   background-color: var(--card);
   box-shadow: var(--shadow-card);
   overflow: hidden;
+  animation: tableEnter 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.15s backwards;
+}
+
+@keyframes tableEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .tableScroll {
@@ -170,8 +249,8 @@
 
 .tableRow {
   border-bottom: 1px solid var(--border);
-  transition: background-color 0.2s ease;
-  animation: fadeIn 0.3s ease-out;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: rowEnter 0.4s cubic-bezier(0.4, 0, 0.2, 1) backwards;
 }
 
 .tableRow:last-child {
@@ -180,6 +259,18 @@
 
 .tableRow:hover {
   background-color: rgba(var(--muted-rgb, 226, 232, 240), 0.3);
+  transform: translateX(4px);
+}
+
+@keyframes rowEnter {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .tableCell {
@@ -200,6 +291,17 @@
   justify-content: center;
   border-radius: 0.5rem;
   background-color: var(--accent);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background-color 0.3s ease;
+}
+
+.tableRow:hover .itemIcon {
+  transform: scale(1.1) rotate(-5deg);
+  background: var(--gradient-warm);
+}
+
+.tableRow:hover .itemIconSvg {
+  color: var(--primary-foreground);
 }
 
 .itemIconSvg {

@@ -3,7 +3,23 @@
   background-color: var(--card);
   padding: 1.5rem;
   box-shadow: var(--shadow-card);
-  animation: slideUp 0.4s ease-out;
+  animation: cardSlideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s backwards;
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.12);
+}
+
+@keyframes cardSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .header {
@@ -25,10 +41,28 @@
   font-weight: 500;
   color: var(--primary);
   text-decoration: none;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.viewAll::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-warm);
+  transition: width 0.3s ease;
+  border-radius: 2px;
 }
 
 .viewAll:hover {
-  text-decoration: underline;
+  text-decoration: none;
+}
+
+.viewAll:hover::after {
+  width: 100%;
 }
 
 .ordersList {
@@ -44,11 +78,26 @@
   padding: 1rem;
   border-radius: 0.5rem;
   background-color: rgba(var(--muted-rgb, 226, 232, 240), 0.5);
-  transition: background-color 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: orderItemEnter 0.5s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+  cursor: pointer;
 }
 
 .orderItem:hover {
   background-color: var(--muted);
+  transform: translateX(8px);
+  box-shadow: -4px 0 0 0 var(--primary);
+}
+
+@keyframes orderItemEnter {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .orderInfo {
@@ -68,6 +117,13 @@
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--foreground);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.orderItem:hover .tableNumber {
+  background: var(--gradient-warm);
+  color: var(--primary-foreground);
+  transform: scale(1.1) rotate(-5deg);
 }
 
 .orderDetails h4 {
@@ -103,11 +159,27 @@
   padding: 0.125rem 0.625rem;
   font-size: 0.75rem;
   font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.statusBadge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .statusIcon {
   height: 0.75rem;
   width: 0.75rem;
+  animation: statusIconPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusIconPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
 }
 
 /* Status Colors */

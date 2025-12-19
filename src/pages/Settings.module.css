@@ -2,6 +2,16 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  animation: pageEnter 0.4s ease-out;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .header h1 {
@@ -9,11 +19,35 @@
   font-weight: 700;
   color: var(--foreground);
   margin: 0;
+  animation: slideFromLeft 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header p {
   color: var(--muted-foreground);
   margin: 0;
+  animation: fadeUp 0.5s ease 0.1s backwards;
+}
+
+@keyframes slideFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .contentGrid {
@@ -33,6 +67,23 @@
   background-color: var(--card);
   padding: 1rem;
   box-shadow: var(--shadow-card);
+  animation: navCardEnter 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s backwards;
+  transition: box-shadow 0.3s ease;
+}
+
+.navCard:hover {
+  box-shadow: 0 10px 25px -8px rgba(0, 0, 0, 0.12);
+}
+
+@keyframes navCardEnter {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .navList {
@@ -49,15 +100,39 @@
   border-radius: 0.5rem;
   padding: 0.75rem;
   text-align: left;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   border: none;
   cursor: pointer;
   background: transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.navButton::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: var(--gradient-warm);
+  border-radius: 0 3px 3px 0;
+  transition: height 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navButton:hover::before {
+  height: 60%;
 }
 
 .navButtonActive {
   background-color: var(--primary);
   color: var(--primary-foreground);
+  box-shadow: 0 4px 12px -2px rgba(249, 115, 22, 0.4);
+}
+
+.navButtonActive::before {
+  height: 0;
 }
 
 .navButtonInactive {
@@ -67,6 +142,7 @@
 .navButtonInactive:hover {
   background-color: var(--muted);
   color: var(--foreground);
+  transform: translateX(4px);
 }
 
 .navIcon {
@@ -105,7 +181,23 @@
   background-color: var(--card);
   padding: 1.5rem;
   box-shadow: var(--shadow-card);
-  animation: fadeIn 0.3s ease-out;
+  animation: settingsCardEnter 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.2s backwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.settingsCard:hover {
+  box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.12);
+}
+
+@keyframes settingsCardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .settingsTitle {
@@ -143,6 +235,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.notificationItem:hover {
+  background-color: rgba(var(--muted-rgb, 226, 232, 240), 0.5);
 }
 
 .notificationInfo h4 {
