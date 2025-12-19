@@ -1,0 +1,265 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headerInfo h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.headerInfo p {
+  color: var(--muted-foreground);
+  margin: 0;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.buttonIcon {
+  height: 1rem;
+  width: 1rem;
+}
+
+/* Low Stock Alert */
+.lowStockAlert {
+  border-radius: 0.75rem;
+  background-color: rgba(var(--destructive-rgb, 239, 68, 68), 0.1);
+  border: 1px solid rgba(var(--destructive-rgb, 239, 68, 68), 0.2);
+  padding: 1rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.alertContent {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.alertIcon {
+  height: 1.25rem;
+  width: 1.25rem;
+  color: var(--destructive);
+}
+
+.alertTitle {
+  font-weight: 500;
+  color: var(--destructive);
+  margin: 0;
+}
+
+.alertDescription {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  margin: 0;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .filters {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.categoryFilters {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.categoryButton {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.categoryButtonActive {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.categoryButtonInactive {
+  background-color: var(--muted);
+  color: var(--muted-foreground);
+}
+
+.categoryButtonInactive:hover {
+  background-color: rgba(var(--muted-rgb, 226, 232, 240), 0.8);
+}
+
+.searchWrapper {
+  position: relative;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .searchWrapper {
+    width: 16rem;
+  }
+}
+
+.searchIcon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 1rem;
+  width: 1rem;
+  color: var(--muted-foreground);
+}
+
+.searchInput {
+  padding-left: 2.25rem;
+}
+
+/* Table */
+.tableWrapper {
+  border-radius: 0.75rem;
+  background-color: var(--card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.tableScroll {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableHeader {
+  border-bottom: 1px solid var(--border);
+  background-color: rgba(var(--muted-rgb, 226, 232, 240), 0.5);
+}
+
+.tableHeaderCell {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.tableRow {
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.2s ease;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.tableRow:hover {
+  background-color: rgba(var(--muted-rgb, 226, 232, 240), 0.3);
+}
+
+.tableCell {
+  padding: 1rem 1.5rem;
+}
+
+.itemCell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.itemIcon {
+  display: flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  background-color: var(--accent);
+}
+
+.itemIconSvg {
+  height: 1.25rem;
+  width: 1.25rem;
+  color: var(--accent-foreground);
+}
+
+.itemName {
+  font-weight: 500;
+  color: var(--card-foreground);
+}
+
+.stockCell {
+  width: 12rem;
+}
+
+.progressBar {
+  height: 0.5rem;
+}
+
+.progressBarLow {
+  --progress-color: var(--destructive);
+}
+
+.quantityCell {
+  display: flex;
+  align-items: center;
+}
+
+.quantity {
+  font-weight: 500;
+  color: var(--card-foreground);
+}
+
+.minStock {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  margin-left: 0.5rem;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border: none;
+}
+
+.statusBadgeLow {
+  background-color: rgba(var(--destructive-rgb, 239, 68, 68), 0.1);
+  color: var(--destructive);
+}
+
+.statusBadgeOk {
+  background-color: rgba(var(--success-rgb, 22, 163, 74), 0.1);
+  color: var(--success);
+}
+
+.statusIcon {
+  height: 0.75rem;
+  width: 0.75rem;
+}
+

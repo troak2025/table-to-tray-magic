@@ -1,0 +1,27 @@
+.container {
+  min-height: 100vh;
+  background-color: var(--background);
+}
+
+.main {
+  min-height: 100vh;
+  padding-top: 3.5rem;
+}
+
+@media (min-width: 1024px) {
+  .main {
+    margin-left: 16rem;
+    padding-top: 0;
+  }
+}
+
+.content {
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .content {
+    padding: 1.5rem;
+  }
+}
+

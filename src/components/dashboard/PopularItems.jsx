@@ -1,4 +1,5 @@
 import { TrendingUp } from "lucide-react";
+import styles from "./PopularItems.module.css";
 
 const mockItems = [
   { id: "1", name: "Classic Burger", orders: 156, revenue: 2184, trend: 12 },
@@ -12,39 +13,35 @@ export function PopularItems() {
   const maxOrders = Math.max(...mockItems.map(item => item.orders));
 
   return (
-    <div className="rounded-xl bg-card p-6 shadow-card animate-slide-up">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-lg font-semibold text-card-foreground">Top Selling Items</h2>
-        <span className="text-sm text-muted-foreground">This week</span>
+    <div className={styles.card}>
+      <div className={styles.header}>
+        <h2 className={styles.title}>Top Selling Items</h2>
+        <span className={styles.subtitle}>This week</span>
       </div>
 
-      <div className="space-y-4">
+      <div className={styles.itemsList}>
         {mockItems.map((item, index) => (
-          <div key={item.id} className="space-y-2">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-muted text-xs font-semibold text-muted-foreground">
+          <div key={item.id} className={styles.item}>
+            <div className={styles.itemHeader}>
+              <div className={styles.itemInfo}>
+                <span className={styles.rank}>
                   {index + 1}
                 </span>
-                <span className="font-medium text-card-foreground">{item.name}</span>
+                <span className={styles.itemName}>{item.name}</span>
               </div>
-              <div className="flex items-center gap-4">
-                <span className="text-sm text-muted-foreground">{item.orders} orders</span>
-                <div className="flex items-center gap-1 text-sm">
-                  {item.trend > 0 ? (
-                    <TrendingUp className="h-3 w-3 text-success" />
-                  ) : (
-                    <TrendingUp className="h-3 w-3 text-destructive rotate-180" />
-                  )}
-                  <span className={item.trend > 0 ? "text-success" : "text-destructive"}>
+              <div className={styles.itemStats}>
+                <span className={styles.ordersCount}>{item.orders} orders</span>
+                <div className={`${styles.trend} ${item.trend > 0 ? styles.trendPositive : styles.trendNegative}`}>
+                  <TrendingUp className={`${styles.trendIcon} ${item.trend < 0 ? styles.trendIconNegative : ""}`} />
+                  <span>
                     {item.trend > 0 ? "+" : ""}{item.trend}%
                   </span>
                 </div>
               </div>
             </div>
-            <div className="h-2 rounded-full bg-muted overflow-hidden">
+            <div className={styles.progressBar}>
               <div
-                className="h-full rounded-full gradient-warm transition-all duration-500"
+                className={styles.progressFill}
                 style={{ width: `${(item.orders / maxOrders) * 100}%` }}
               />
             </div>
@@ -54,4 +51,3 @@ export function PopularItems() {
     </div>
   );
 }
-

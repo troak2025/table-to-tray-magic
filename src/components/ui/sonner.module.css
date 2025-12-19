@@ -1,0 +1,26 @@
+.toaster {
+  --normal-bg: var(--background);
+  --normal-text: var(--foreground);
+  --normal-border: var(--border);
+}
+
+.toast {
+  background-color: var(--background) !important;
+  color: var(--foreground) !important;
+  border-color: var(--border) !important;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
+}
+
+.description {
+  color: var(--muted-foreground) !important;
+}
+
+.actionButton {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+}
+
+.cancelButton {
+  background-color: var(--muted) !important;
+  color: var(--muted-foreground) !important;
+}

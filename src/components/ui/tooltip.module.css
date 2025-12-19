@@ -1,0 +1,38 @@
+.content {
+  z-index: 50;
+  overflow: hidden;
+  border-radius: calc(var(--radius) - 2px);
+  border: 1px solid var(--border);
+  background-color: var(--popover);
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  color: var(--popover-foreground);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  animation: fadeIn 0.2s ease, zoomIn 0.2s ease;
+}
+
+.content[data-state="closed"] {
+  animation: fadeOut 0.2s ease, zoomOut 0.2s ease;
+}
+
+.content[data-side="bottom"] {
+  animation: fadeIn 0.2s ease, slideInFromTop 0.2s ease;
+}
+
+.content[data-side="left"] {
+  animation: fadeIn 0.2s ease, slideInFromRight 0.2s ease;
+}
+
+.content[data-side="right"] {
+  animation: fadeIn 0.2s ease, slideInFromLeft 0.2s ease;
+}
+
+.content[data-side="top"] {
+  animation: fadeIn 0.2s ease, slideInFromBottom 0.2s ease;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+

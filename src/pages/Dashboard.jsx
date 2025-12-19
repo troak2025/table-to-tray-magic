@@ -2,17 +2,18 @@ import { DollarSign, ShoppingBag, Clock, TrendingUp } from "lucide-react";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { RecentOrders } from "@/components/dashboard/RecentOrders";
 import { PopularItems } from "@/components/dashboard/PopularItems";
+import styles from "./Dashboard.module.css";
 
 export default function Dashboard() {
   return (
-    <div className="space-y-6">
+    <div className={styles.container}>
       {/* Header */}
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+      <div className={styles.header}>
         <div>
-          <h1 className="text-xl font-bold text-foreground sm:text-2xl">Dashboard</h1>
-          <p className="text-sm text-muted-foreground sm:text-base">Welcome back! Here's what's happening today.</p>
+          <h1 className={styles.title}>Dashboard</h1>
+          <p className={styles.subtitle}>Welcome back! Here's what's happening today.</p>
         </div>
-        <div className="text-xs text-muted-foreground sm:text-sm">
+        <div className={styles.date}>
           {new Date().toLocaleDateString('en-US', { 
             weekday: 'long', 
             year: 'numeric', 
@@ -23,7 +24,7 @@ export default function Dashboard() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className={styles.statsGrid}>
         <StatCard
           title="Today's Revenue"
           value="$4,829"
@@ -51,8 +52,8 @@ export default function Dashboard() {
       </div>
 
       {/* Main Content Grid */}
-      <div className="grid gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-2">
+      <div className={styles.contentGrid}>
+        <div>
           <RecentOrders />
         </div>
         <div>
@@ -62,4 +63,3 @@ export default function Dashboard() {
     </div>
   );
 }
-

@@ -3,16 +3,16 @@ import { Search, Filter, Clock, CheckCircle, ChefHat, Utensils, Package } from "
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
+import styles from "./Orders.module.css";
 
 const statusConfig = {
-  pending: { label: "Pending", icon: Clock, className: "text-warning", bgClassName: "bg-warning/10" },
-  confirmed: { label: "Confirmed", icon: CheckCircle, className: "text-primary", bgClassName: "bg-primary/10" },
-  preparing: { label: "Preparing", icon: ChefHat, className: "text-accent-foreground", bgClassName: "bg-accent" },
-  ready: { label: "Ready", icon: Utensils, className: "text-success", bgClassName: "bg-success/10" },
-  served: { label: "Served", icon: Package, className: "text-success", bgClassName: "bg-success/10" },
-  completed: { label: "Completed", icon: CheckCircle, className: "text-muted-foreground", bgClassName: "bg-muted" },
-  cancelled: { label: "Cancelled", icon: Clock, className: "text-destructive", bgClassName: "bg-destructive/10" },
+  pending: { label: "Pending", icon: Clock, bgClass: styles.bgWarning, textClass: styles.textWarning },
+  confirmed: { label: "Confirmed", icon: CheckCircle, bgClass: styles.bgPrimary, textClass: styles.textPrimary },
+  preparing: { label: "Preparing", icon: ChefHat, bgClass: styles.bgAccent, textClass: styles.textAccent },
+  ready: { label: "Ready", icon: Utensils, bgClass: styles.bgSuccess, textClass: styles.textSuccess },
+  served: { label: "Served", icon: Package, bgClass: styles.bgSuccess, textClass: styles.textSuccess },
+  completed: { label: "Completed", icon: CheckCircle, bgClass: styles.bgMuted, textClass: styles.textMuted },
+  cancelled: { label: "Cancelled", icon: Clock, bgClass: styles.bgDestructive, textClass: styles.textDestructive },
 };
 
 const statusFilters = ["all", "pending", "confirmed", "preparing", "ready", "completed"];
@@ -93,50 +93,45 @@ export default function Orders() {
   });
 
   return (
-    <div className="space-y-6">
+    <div className={styles.container}>
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-foreground">Orders</h1>
-          <p className="text-muted-foreground">Manage and track all restaurant orders.</p>
+      <div className={styles.header}>
+        <div className={styles.headerInfo}>
+          <h1>Orders</h1>
+          <p>Manage and track all restaurant orders.</p>
         </div>
-        <Button variant="outline" className="gap-2">
-          <Filter className="h-4 w-4" />
+        <Button variant="outline" className={styles.filterButton}>
+          <Filter className={styles.buttonIcon} />
           Filter
         </Button>
       </div>
 
       {/* Status Filters */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex gap-2 overflow-x-auto pb-2">
+      <div className={styles.filters}>
+        <div className={styles.statusFilters}>
           {statusFilters.map((status) => (
             <button
               key={status}
               onClick={() => setSelectedStatus(status)}
-              className={cn(
-                "px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200",
-                selectedStatus === status
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-muted text-muted-foreground hover:bg-muted/80"
-              )}
+              className={`${styles.statusButton} ${selectedStatus === status ? styles.statusButtonActive : styles.statusButtonInactive}`}
             >
               {status === "all" ? "All Orders" : statusConfig[status].label}
             </button>
           ))}
         </div>
-        <div className="relative w-full sm:w-64">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <div className={styles.searchWrapper}>
+          <Search className={styles.searchIcon} />
           <Input
             placeholder="Search orders..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-9"
+            className={styles.searchInput}
           />
         </div>
       </div>
 
       {/* Orders List */}
-      <div className="space-y-4">
+      <div className={styles.ordersList}>
         {filteredOrders.map((order, index) => {
           const config = statusConfig[order.status];
           const StatusIcon = config.icon;
@@ -144,23 +139,23 @@ export default function Orders() {
           return (
             <div
               key={order.id}
-              className="rounded-xl bg-card p-6 shadow-card transition-all duration-200 hover:shadow-elevated animate-slide-up"
+              className={styles.orderCard}
               style={{ animationDelay: `${index * 50}ms` }}
             >
-              <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+              <div className={styles.orderContent}>
                 {/* Order Info */}
-                <div className="flex items-start gap-4">
-                  <div className={cn("flex h-12 w-12 items-center justify-center rounded-xl", config.bgClassName)}>
-                    <StatusIcon className={cn("h-6 w-6", config.className)} />
+                <div className={styles.orderInfo}>
+                  <div className={`${styles.statusIconWrapper} ${config.bgClass}`}>
+                    <StatusIcon className={`${styles.statusIcon} ${config.textClass}`} />
                   </div>
-                  <div>
-                    <div className="flex items-center gap-3">
-                      <h3 className="font-semibold text-card-foreground">{order.id}</h3>
-                      <Badge variant="outline" className="text-xs">
+                  <div className={styles.orderDetails}>
+                    <h3>
+                      {order.id}
+                      <Badge variant="outline" className={styles.typeBadge}>
                         {order.type}
                       </Badge>
-                    </div>
-                    <p className="text-sm text-muted-foreground">
+                    </h3>
+                    <p>
                       {order.tableNumber ? `Table ${order.tableNumber}` : order.customerName}
                       {" · "}
                       {formatTime(order.createdAt)}
@@ -169,8 +164,8 @@ export default function Orders() {
                 </div>
 
                 {/* Items */}
-                <div className="flex-1 lg:px-6">
-                  <p className="text-sm text-muted-foreground">
+                <div className={styles.orderItems}>
+                  <p>
                     {order.items.map((item, i) => (
                       <span key={item.id}>
                         {item.quantity}x {item.menuItem.name}
@@ -181,11 +176,11 @@ export default function Orders() {
                 </div>
 
                 {/* Actions */}
-                <div className="flex items-center gap-4">
-                  <span className="text-xl font-bold text-card-foreground">
+                <div className={styles.orderActions}>
+                  <span className={styles.orderTotal}>
                     ${order.total.toFixed(2)}
                   </span>
-                  <Badge className={cn("gap-1", config.bgClassName, config.className, "border-0")}>
+                  <Badge className={`${styles.statusBadge} ${config.bgClass} ${config.textClass}`}>
                     {config.label}
                   </Badge>
                   <Button variant="outline" size="sm">
@@ -200,4 +195,3 @@ export default function Orders() {
     </div>
   );
 }
-

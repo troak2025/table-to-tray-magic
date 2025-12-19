@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { cn } from "@/lib/utils";
+import styles from "./Menu.module.css";
 
 const categories = ["All", "Appetizers", "Main Course", "Desserts", "Beverages"];
 
@@ -35,96 +35,91 @@ export default function Menu() {
   });
 
   return (
-    <div className="space-y-6">
+    <div className={styles.container}>
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-foreground">Menu Management</h1>
-          <p className="text-muted-foreground">Manage your restaurant's menu items and categories.</p>
+      <div className={styles.header}>
+        <div className={styles.headerInfo}>
+          <h1>Menu Management</h1>
+          <p>Manage your restaurant's menu items and categories.</p>
         </div>
-        <Button className="gap-2">
-          <Plus className="h-4 w-4" />
+        <Button className={styles.addButton}>
+          <Plus className={styles.buttonIcon} />
           Add Item
         </Button>
       </div>
 
       {/* Filters */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex gap-2 overflow-x-auto pb-2">
+      <div className={styles.filters}>
+        <div className={styles.categoryFilters}>
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={cn(
-                "px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200",
-                selectedCategory === category
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-muted text-muted-foreground hover:bg-muted/80"
-              )}
+              className={`${styles.categoryButton} ${selectedCategory === category ? styles.categoryButtonActive : styles.categoryButtonInactive}`}
             >
               {category}
             </button>
           ))}
         </div>
-        <div className="relative w-full sm:w-64">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <div className={styles.searchWrapper}>
+          <Search className={styles.searchIcon} />
           <Input
             placeholder="Search menu items..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-9"
+            className={styles.searchInput}
           />
         </div>
       </div>
 
       {/* Menu Grid */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className={styles.menuGrid}>
         {filteredItems.map((item, index) => (
           <div
             key={item.id}
-            className="group rounded-xl bg-card p-4 shadow-card transition-all duration-200 hover:shadow-elevated animate-scale-in"
+            className={styles.menuCard}
             style={{ animationDelay: `${index * 50}ms` }}
           >
             {/* Image placeholder */}
-            <div className="relative mb-4 aspect-[4/3] rounded-lg bg-gradient-to-br from-muted to-muted/50 overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center text-4xl">
+            <div className={styles.imageWrapper}>
+              <div className={styles.imagePlaceholder}>
                 🍽️
               </div>
               {!item.available && (
-                <div className="absolute inset-0 bg-background/80 flex items-center justify-center">
+                <div className={styles.unavailableOverlay}>
                   <Badge variant="secondary">Unavailable</Badge>
                 </div>
               )}
             </div>
 
-            <div className="space-y-2">
-              <div className="flex items-start justify-between">
+            <div className={styles.menuContent}>
+              <div className={styles.menuHeader}>
                 <div>
-                  <h3 className="font-semibold text-card-foreground line-clamp-1">{item.name}</h3>
-                  <Badge variant="outline" className="mt-1 text-xs">
+                  <h3 className={styles.menuName}>{item.name}</h3>
+                  <Badge variant="outline" className={styles.categoryBadge}>
                     {item.category}
                   </Badge>
                 </div>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <MoreVertical className="h-4 w-4" />
+                    <Button variant="ghost" size="icon" className={styles.menuButton}>
+                      <MoreVertical className={styles.menuButtonIcon} />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuItem>
-                      <Edit className="mr-2 h-4 w-4" />
+                    <DropdownMenuItem className={styles.dropdownItem}>
+                      <Edit className={styles.dropdownIcon} />
                       Edit
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="text-destructive">
-                      <Trash2 className="mr-2 h-4 w-4" />
+                    <DropdownMenuItem className={`${styles.dropdownItem} ${styles.destructiveItem}`}>
+                      <Trash2 className={styles.dropdownIcon} />
                       Delete
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </div>
-              <p className="text-sm text-muted-foreground line-clamp-2">{item.description}</p>
-              <p className="text-lg font-bold text-primary">${item.price.toFixed(2)}</p>
+              <p className={styles.menuDescription}>{item.description}</p>
+              <p className={styles.menuPrice}>${item.price.toFixed(2)}</p>
             </div>
           </div>
         ))}
@@ -132,4 +127,3 @@ export default function Menu() {
     </div>
   );
 }
-

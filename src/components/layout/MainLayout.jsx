@@ -1,15 +1,15 @@
 import { Sidebar } from "./Sidebar";
+import styles from "./MainLayout.module.css";
 
 export function MainLayout({ children }) {
   return (
-    <div className="min-h-screen bg-background">
+    <div className={styles.container}>
       <Sidebar />
-      <main className="min-h-screen pt-14 lg:ml-64 lg:pt-0">
-        <div className="p-4 md:p-6">
+      <main className={styles.main}>
+        <div className={styles.content}>
           {children}
         </div>
       </main>
     </div>
   );
 }
-

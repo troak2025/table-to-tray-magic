@@ -1,0 +1,288 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headerInfo h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.headerInfo p {
+  color: var(--muted-foreground);
+  margin: 0;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.buttonIcon {
+  height: 1rem;
+  width: 1rem;
+}
+
+/* Stats Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .statsGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.statCard {
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+.statCardDefault {
+  background-color: var(--card);
+  box-shadow: var(--shadow-card);
+}
+
+.statCardSuccess {
+  background-color: rgba(var(--success-rgb, 22, 163, 74), 0.1);
+  border: 1px solid rgba(var(--success-rgb, 22, 163, 74), 0.2);
+}
+
+.statCardPrimary {
+  background-color: rgba(var(--primary-rgb, 249, 115, 22), 0.1);
+  border: 1px solid rgba(var(--primary-rgb, 249, 115, 22), 0.2);
+}
+
+.statCardWarning {
+  background-color: rgba(var(--warning-rgb, 245, 158, 11), 0.1);
+  border: 1px solid rgba(var(--warning-rgb, 245, 158, 11), 0.2);
+}
+
+.statLabel {
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.statValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.statLabelDefault {
+  color: var(--muted-foreground);
+}
+
+.statValueDefault {
+  color: var(--card-foreground);
+}
+
+.statLabelSuccess, .statValueSuccess {
+  color: var(--success);
+}
+
+.statLabelPrimary, .statValuePrimary {
+  color: var(--primary);
+}
+
+.statLabelWarning, .statValueWarning {
+  color: var(--warning);
+}
+
+/* Status Filters */
+.statusFilters {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.statusButton {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.statusButtonActive {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.statusButtonInactive {
+  background-color: var(--muted);
+  color: var(--muted-foreground);
+}
+
+.statusButtonInactive:hover {
+  background-color: rgba(var(--muted-rgb, 226, 232, 240), 0.8);
+}
+
+/* Tables Grid */
+.tablesGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .tablesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .tablesGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .tablesGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .tablesGrid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* Table Card */
+.tableCard {
+  position: relative;
+  border-radius: 0.75rem;
+  border: 2px solid;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  animation: scaleIn 0.2s ease-out;
+}
+
+.tableCard:hover {
+  transform: scale(1.05);
+}
+
+.tableCardAvailable {
+  background-color: rgba(var(--success-rgb, 22, 163, 74), 0.1);
+  border-color: rgba(var(--success-rgb, 22, 163, 74), 0.3);
+}
+
+.tableCardOccupied {
+  background-color: rgba(var(--primary-rgb, 249, 115, 22), 0.1);
+  border-color: rgba(var(--primary-rgb, 249, 115, 22), 0.3);
+}
+
+.tableCardReserved {
+  background-color: rgba(var(--warning-rgb, 245, 158, 11), 0.1);
+  border-color: rgba(var(--warning-rgb, 245, 158, 11), 0.3);
+}
+
+.tableCardCleaning {
+  background-color: var(--muted);
+  border-color: var(--border);
+}
+
+.statusBadgeWrapper {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+}
+
+.statusBadge {
+  font-size: 0.75rem;
+}
+
+.tableContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 1rem;
+}
+
+.tableNumber {
+  display: flex;
+  height: 4rem;
+  width: 4rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  margin-bottom: 0.75rem;
+}
+
+.tableNumberAvailable {
+  background-color: rgba(var(--success-rgb, 22, 163, 74), 0.2);
+}
+
+.tableNumberOccupied {
+  background-color: rgba(var(--primary-rgb, 249, 115, 22), 0.2);
+}
+
+.tableNumberReserved {
+  background-color: rgba(var(--warning-rgb, 245, 158, 11), 0.2);
+}
+
+.tableNumberCleaning {
+  background-color: var(--muted);
+}
+
+.tableNumberText {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.seatsInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+.seatsIcon {
+  height: 1rem;
+  width: 1rem;
+}
+
+.orderStatus {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+/* Status text colors */
+.textSuccess {
+  color: var(--success);
+}
+
+.textPrimary {
+  color: var(--primary);
+}
+
+.textWarning {
+  color: var(--warning);
+}
+
+.textMuted {
+  color: var(--muted-foreground);
+}
+

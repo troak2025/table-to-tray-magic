@@ -1,6 +1,6 @@
 import { BarChart3, TrendingUp, DollarSign, ShoppingBag, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import styles from "./Reports.module.css";
 
 const weeklyData = [
   { day: "Mon", revenue: 2400, orders: 85 },
@@ -24,89 +24,89 @@ const topCategories = [
 
 export default function Reports() {
   return (
-    <div className="space-y-6">
+    <div className={styles.container}>
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-foreground">Reports & Analytics</h1>
-          <p className="text-muted-foreground">Track your restaurant's performance and insights.</p>
+      <div className={styles.header}>
+        <div className={styles.headerInfo}>
+          <h1>Reports & Analytics</h1>
+          <p>Track your restaurant's performance and insights.</p>
         </div>
-        <Button variant="outline" className="gap-2">
-          <Calendar className="h-4 w-4" />
+        <Button variant="outline" className={styles.dateButton}>
+          <Calendar className={styles.buttonIcon} />
           This Week
         </Button>
       </div>
 
       {/* Summary Stats */}
-      <div className="grid gap-6 md:grid-cols-3">
-        <div className="rounded-xl bg-card p-6 shadow-card animate-fade-in">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-muted-foreground">Weekly Revenue</p>
-              <p className="text-3xl font-bold text-card-foreground mt-1">$26,100</p>
-              <div className="flex items-center gap-1 mt-2 text-sm text-success">
-                <TrendingUp className="h-4 w-4" />
+      <div className={styles.summaryGrid}>
+        <div className={styles.summaryCard}>
+          <div className={styles.summaryContent}>
+            <div className={styles.summaryInfo}>
+              <p className={styles.summaryLabel}>Weekly Revenue</p>
+              <p className={styles.summaryValue}>$26,100</p>
+              <div className={styles.summaryChange}>
+                <TrendingUp className={styles.changeIcon} />
                 <span>+12.5% from last week</span>
               </div>
             </div>
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent">
-              <DollarSign className="h-6 w-6 text-accent-foreground" />
+            <div className={styles.summaryIconWrapper}>
+              <DollarSign className={styles.summaryIcon} />
             </div>
           </div>
         </div>
 
-        <div className="rounded-xl bg-card p-6 shadow-card animate-fade-in" style={{ animationDelay: "50ms" }}>
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-muted-foreground">Total Orders</p>
-              <p className="text-3xl font-bold text-card-foreground mt-1">949</p>
-              <div className="flex items-center gap-1 mt-2 text-sm text-success">
-                <TrendingUp className="h-4 w-4" />
+        <div className={styles.summaryCard} style={{ animationDelay: "50ms" }}>
+          <div className={styles.summaryContent}>
+            <div className={styles.summaryInfo}>
+              <p className={styles.summaryLabel}>Total Orders</p>
+              <p className={styles.summaryValue}>949</p>
+              <div className={styles.summaryChange}>
+                <TrendingUp className={styles.changeIcon} />
                 <span>+8.2% from last week</span>
               </div>
             </div>
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent">
-              <ShoppingBag className="h-6 w-6 text-accent-foreground" />
+            <div className={styles.summaryIconWrapper}>
+              <ShoppingBag className={styles.summaryIcon} />
             </div>
           </div>
         </div>
 
-        <div className="rounded-xl bg-card p-6 shadow-card animate-fade-in" style={{ animationDelay: "100ms" }}>
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-muted-foreground">Avg. Order Value</p>
-              <p className="text-3xl font-bold text-card-foreground mt-1">$27.50</p>
-              <div className="flex items-center gap-1 mt-2 text-sm text-success">
-                <TrendingUp className="h-4 w-4" />
+        <div className={styles.summaryCard} style={{ animationDelay: "100ms" }}>
+          <div className={styles.summaryContent}>
+            <div className={styles.summaryInfo}>
+              <p className={styles.summaryLabel}>Avg. Order Value</p>
+              <p className={styles.summaryValue}>$27.50</p>
+              <div className={styles.summaryChange}>
+                <TrendingUp className={styles.changeIcon} />
                 <span>+3.8% from last week</span>
               </div>
             </div>
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent">
-              <BarChart3 className="h-6 w-6 text-accent-foreground" />
+            <div className={styles.summaryIconWrapper}>
+              <BarChart3 className={styles.summaryIcon} />
             </div>
           </div>
         </div>
       </div>
 
       {/* Charts Grid */}
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className={styles.chartsGrid}>
         {/* Revenue Chart */}
-        <div className="rounded-xl bg-card p-6 shadow-card animate-slide-up">
-          <h3 className="text-lg font-semibold text-card-foreground mb-6">Daily Revenue</h3>
-          <div className="space-y-4">
+        <div className={styles.chartCard}>
+          <h3 className={styles.chartTitle}>Daily Revenue</h3>
+          <div className={styles.revenueList}>
             {weeklyData.map((data, index) => (
-              <div key={data.day} className="flex items-center gap-4">
-                <span className="w-10 text-sm font-medium text-muted-foreground">{data.day}</span>
-                <div className="flex-1 h-8 bg-muted rounded-lg overflow-hidden">
+              <div key={data.day} className={styles.revenueItem}>
+                <span className={styles.dayLabel}>{data.day}</span>
+                <div className={styles.barContainer}>
                   <div
-                    className="h-full gradient-warm rounded-lg transition-all duration-500"
+                    className={styles.bar}
                     style={{ 
                       width: `${(data.revenue / maxRevenue) * 100}%`,
                       animationDelay: `${index * 100}ms`
                     }}
                   />
                 </div>
-                <span className="w-20 text-sm font-semibold text-card-foreground text-right">
+                <span className={styles.revenueValue}>
                   ${data.revenue.toLocaleString()}
                 </span>
               </div>
@@ -115,26 +115,23 @@ export default function Reports() {
         </div>
 
         {/* Category Breakdown */}
-        <div className="rounded-xl bg-card p-6 shadow-card animate-slide-up" style={{ animationDelay: "100ms" }}>
-          <h3 className="text-lg font-semibold text-card-foreground mb-6">Sales by Category</h3>
-          <div className="space-y-4">
+        <div className={styles.chartCard} style={{ animationDelay: "100ms" }}>
+          <h3 className={styles.chartTitle}>Sales by Category</h3>
+          <div className={styles.categoryList}>
             {topCategories.map((category, index) => (
-              <div key={category.name} className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-card-foreground">{category.name}</span>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm text-muted-foreground">{category.percentage}%</span>
-                    <span className="text-sm font-semibold text-card-foreground">
+              <div key={category.name} className={styles.categoryItem}>
+                <div className={styles.categoryHeader}>
+                  <span className={styles.categoryName}>{category.name}</span>
+                  <div className={styles.categoryStats}>
+                    <span className={styles.categoryPercentage}>{category.percentage}%</span>
+                    <span className={styles.categoryRevenue}>
                       ${category.revenue.toLocaleString()}
                     </span>
                   </div>
                 </div>
-                <div className="h-2 bg-muted rounded-full overflow-hidden">
+                <div className={styles.progressBar}>
                   <div
-                    className={cn(
-                      "h-full rounded-full transition-all duration-500",
-                      index === 0 ? "gradient-warm" : "bg-primary/60"
-                    )}
+                    className={`${styles.progressFill} ${index === 0 ? styles.progressFillPrimary : styles.progressFillSecondary}`}
                     style={{ 
                       width: `${category.percentage}%`,
                       animationDelay: `${index * 100}ms`
@@ -148,37 +145,33 @@ export default function Reports() {
       </div>
 
       {/* Peak Hours */}
-      <div className="rounded-xl bg-card p-6 shadow-card animate-slide-up" style={{ animationDelay: "200ms" }}>
-        <h3 className="text-lg font-semibold text-card-foreground mb-6">Peak Hours Analysis</h3>
-        <div className="flex items-end gap-2 h-48">
+      <div className={styles.peakHoursCard} style={{ animationDelay: "200ms" }}>
+        <h3 className={styles.chartTitle}>Peak Hours Analysis</h3>
+        <div className={styles.peakHoursChart}>
           {Array.from({ length: 12 }, (_, i) => {
             const hour = i + 11;
             const value = Math.random() * 80 + 20;
             const isPeak = hour >= 12 && hour <= 14 || hour >= 18 && hour <= 20;
             
             return (
-              <div key={hour} className="flex-1 flex flex-col items-center gap-2">
-                <div className="w-full flex-1 flex items-end">
+              <div key={hour} className={styles.hourBar}>
+                <div className={styles.barWrapper}>
                   <div
-                    className={cn(
-                      "w-full rounded-t-lg transition-all duration-500",
-                      isPeak ? "gradient-warm" : "bg-muted"
-                    )}
+                    className={`${styles.peakBar} ${isPeak ? styles.peakBarActive : styles.peakBarInactive}`}
                     style={{ height: `${value}%` }}
                   />
                 </div>
-                <span className="text-xs text-muted-foreground">
+                <span className={styles.hourLabel}>
                   {hour > 12 ? `${hour - 12}pm` : hour === 12 ? "12pm" : `${hour}am`}
                 </span>
               </div>
             );
           })}
         </div>
-        <p className="mt-4 text-sm text-muted-foreground">
-          Peak hours are typically <span className="font-medium text-primary">12-2 PM</span> and <span className="font-medium text-primary">6-8 PM</span>
+        <p className={styles.peakHoursNote}>
+          Peak hours are typically <span className={styles.peakTime}>12-2 PM</span> and <span className={styles.peakTime}>6-8 PM</span>
         </p>
       </div>
     </div>
   );
 }
-

@@ -1,0 +1,150 @@
+.card {
+  border-radius: 0.75rem;
+  background-color: var(--card);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
+  animation: slideUp 0.4s ease-out;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--card-foreground);
+  margin: 0;
+}
+
+.viewAll {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.viewAll:hover {
+  text-decoration: underline;
+}
+
+.ordersList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.orderItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: rgba(var(--muted-rgb, 226, 232, 240), 0.5);
+  transition: background-color 0.2s ease;
+}
+
+.orderItem:hover {
+  background-color: var(--muted);
+}
+
+.orderInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.tableNumber {
+  display: flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  background-color: var(--background);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.orderDetails h4 {
+  font-weight: 500;
+  color: var(--card-foreground);
+  margin: 0;
+}
+
+.orderDetails p {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  margin: 0;
+}
+
+.orderActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.orderTotal {
+  font-weight: 600;
+  color: var(--card-foreground);
+}
+
+/* Status Badge */
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 9999px;
+  border: 1px solid;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.statusIcon {
+  height: 0.75rem;
+  width: 0.75rem;
+}
+
+/* Status Colors */
+.statusPending {
+  background-color: rgba(var(--warning-rgb, 245, 158, 11), 0.1);
+  color: var(--warning);
+  border-color: rgba(var(--warning-rgb, 245, 158, 11), 0.2);
+}
+
+.statusConfirmed {
+  background-color: rgba(var(--primary-rgb, 249, 115, 22), 0.1);
+  color: var(--primary);
+  border-color: rgba(var(--primary-rgb, 249, 115, 22), 0.2);
+}
+
+.statusPreparing {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+  border-color: var(--accent);
+}
+
+.statusReady,
+.statusServed {
+  background-color: rgba(var(--success-rgb, 22, 163, 74), 0.1);
+  color: var(--success);
+  border-color: rgba(var(--success-rgb, 22, 163, 74), 0.2);
+}
+
+.statusCompleted {
+  background-color: var(--muted);
+  color: var(--muted-foreground);
+  border-color: var(--muted);
+}
+
+.statusCancelled {
+  background-color: rgba(var(--destructive-rgb, 239, 68, 68), 0.1);
+  color: var(--destructive);
+  border-color: rgba(var(--destructive-rgb, 239, 68, 68), 0.2);
+}
+

@@ -1,0 +1,205 @@
+/* Desktop Sidebar */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 40;
+  display: none;
+  height: 100vh;
+  width: 16rem;
+  background-color: var(--sidebar-background);
+  color: var(--sidebar-foreground);
+}
+
+@media (min-width: 1024px) {
+  .sidebar {
+    display: block;
+  }
+}
+
+/* Mobile Header */
+.mobileHeader {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  height: 3.5rem;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid var(--border);
+  background-color: var(--background);
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .mobileHeader {
+    display: none;
+  }
+}
+
+.menuButton {
+  flex-shrink: 0;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logoIcon {
+  display: flex;
+  height: 2rem;
+  width: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  background: var(--gradient-warm);
+}
+
+.logoIconSmall {
+  height: 1rem;
+  width: 1rem;
+  color: var(--primary-foreground);
+}
+
+.logoIconLarge {
+  height: 1.25rem;
+  width: 1.25rem;
+  color: var(--primary-foreground);
+}
+
+.logoText {
+  font-weight: 700;
+}
+
+.logoTextLarge {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+/* Sidebar Content */
+.sidebarContent {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+.logoSection {
+  display: flex;
+  height: 4rem;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid var(--sidebar-border);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.logoWrapper {
+  display: flex;
+  height: 2.25rem;
+  width: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  background: var(--gradient-warm);
+}
+
+/* Navigation */
+.nav {
+  flex: 1;
+  padding: 1rem 0.75rem;
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: rgba(var(--sidebar-foreground-rgb, 248, 250, 252), 0.7);
+}
+
+.navLink:hover {
+  background-color: var(--sidebar-accent);
+  color: var(--sidebar-foreground);
+}
+
+.navLinkActive {
+  background-color: var(--sidebar-primary);
+  color: var(--sidebar-primary-foreground);
+}
+
+.navIcon {
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+/* User Section */
+.userSection {
+  border-top: 1px solid var(--sidebar-border);
+  padding: 1rem;
+}
+
+.userContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.userAvatar {
+  display: flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: var(--sidebar-accent);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.userInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.userName {
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.userRole {
+  font-size: 0.75rem;
+  color: rgba(var(--sidebar-foreground-rgb, 248, 250, 252), 0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+/* Sheet content for mobile */
+.sheetContent {
+  width: 16rem;
+  padding: 0;
+  background-color: var(--sidebar-background);
+  color: var(--sidebar-foreground);
+}
+

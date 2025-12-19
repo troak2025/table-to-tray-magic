@@ -1,0 +1,165 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.header p {
+  color: var(--muted-foreground);
+  margin: 0;
+}
+
+.contentGrid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .contentGrid {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+/* Settings Navigation */
+.navCard {
+  border-radius: 0.75rem;
+  background-color: var(--card);
+  padding: 1rem;
+  box-shadow: var(--shadow-card);
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.navButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  text-align: left;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+}
+
+.navButtonActive {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.navButtonInactive {
+  color: var(--muted-foreground);
+}
+
+.navButtonInactive:hover {
+  background-color: var(--muted);
+  color: var(--foreground);
+}
+
+.navIcon {
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+.navLabel {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.navDescription {
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+.navDescriptionActive {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.navDescriptionInactive {
+  color: var(--muted-foreground);
+}
+
+/* Settings Content */
+.settingsContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.settingsCard {
+  border-radius: 0.75rem;
+  background-color: var(--card);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.settingsTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--card-foreground);
+  margin: 0 0 1rem 0;
+}
+
+.formGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .formGridHalf {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Notification Settings */
+.notificationList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.notificationItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.notificationInfo h4 {
+  font-weight: 500;
+  color: var(--card-foreground);
+  margin: 0;
+}
+
+.notificationInfo p {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  margin: 0;
+}
+
+/* Save Button */
+.saveButtonWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+

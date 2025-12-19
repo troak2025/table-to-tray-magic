@@ -1,0 +1,261 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headerInfo h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.headerInfo p {
+  color: var(--muted-foreground);
+  margin: 0;
+}
+
+.filterButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.buttonIcon {
+  height: 1rem;
+  width: 1rem;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .filters {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.statusFilters {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.statusButton {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.statusButtonActive {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.statusButtonInactive {
+  background-color: var(--muted);
+  color: var(--muted-foreground);
+}
+
+.statusButtonInactive:hover {
+  background-color: rgba(var(--muted-rgb, 226, 232, 240), 0.8);
+}
+
+.searchWrapper {
+  position: relative;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .searchWrapper {
+    width: 16rem;
+  }
+}
+
+.searchIcon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 1rem;
+  width: 1rem;
+  color: var(--muted-foreground);
+}
+
+.searchInput {
+  padding-left: 2.25rem;
+}
+
+/* Orders List */
+.ordersList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Order Card */
+.orderCard {
+  border-radius: 0.75rem;
+  background-color: var(--card);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
+  transition: all 0.2s ease;
+  animation: slideUp 0.4s ease-out;
+}
+
+.orderCard:hover {
+  box-shadow: var(--shadow-elevated);
+}
+
+.orderContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .orderContent {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.orderInfo {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.statusIconWrapper {
+  display: flex;
+  height: 3rem;
+  width: 3rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+}
+
+.statusIcon {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.orderDetails h3 {
+  font-weight: 600;
+  color: var(--card-foreground);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.orderDetails p {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  margin: 0;
+}
+
+.typeBadge {
+  font-size: 0.75rem;
+}
+
+.orderItems {
+  flex: 1;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+@media (min-width: 1024px) {
+  .orderItems {
+    padding: 0 1.5rem;
+  }
+}
+
+.orderActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.orderTotal {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--card-foreground);
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border: none;
+}
+
+/* Status Colors */
+.bgWarning {
+  background-color: rgba(var(--warning-rgb, 245, 158, 11), 0.1);
+}
+
+.bgPrimary {
+  background-color: rgba(var(--primary-rgb, 249, 115, 22), 0.1);
+}
+
+.bgAccent {
+  background-color: var(--accent);
+}
+
+.bgSuccess {
+  background-color: rgba(var(--success-rgb, 22, 163, 74), 0.1);
+}
+
+.bgMuted {
+  background-color: var(--muted);
+}
+
+.bgDestructive {
+  background-color: rgba(var(--destructive-rgb, 239, 68, 68), 0.1);
+}
+
+.textWarning {
+  color: var(--warning);
+}
+
+.textPrimary {
+  color: var(--primary);
+}
+
+.textAccent {
+  color: var(--accent-foreground);
+}
+
+.textSuccess {
+  color: var(--success);
+}
+
+.textMuted {
+  color: var(--muted-foreground);
+}
+
+.textDestructive {
+  color: var(--destructive);
+}
+

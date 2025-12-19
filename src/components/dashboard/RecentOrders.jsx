@@ -1,15 +1,14 @@
 import { Clock, CheckCircle, ChefHat, Utensils } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
+import styles from "./RecentOrders.module.css";
 
 const statusConfig = {
-  pending: { label: "Pending", icon: Clock, className: "bg-warning/10 text-warning border-warning/20" },
-  confirmed: { label: "Confirmed", icon: CheckCircle, className: "bg-primary/10 text-primary border-primary/20" },
-  preparing: { label: "Preparing", icon: ChefHat, className: "bg-accent text-accent-foreground border-accent" },
-  ready: { label: "Ready", icon: Utensils, className: "bg-success/10 text-success border-success/20" },
-  served: { label: "Served", icon: CheckCircle, className: "bg-success/10 text-success border-success/20" },
-  completed: { label: "Completed", icon: CheckCircle, className: "bg-muted text-muted-foreground border-muted" },
-  cancelled: { label: "Cancelled", icon: Clock, className: "bg-destructive/10 text-destructive border-destructive/20" },
+  pending: { label: "Pending", icon: Clock, className: styles.statusPending },
+  confirmed: { label: "Confirmed", icon: CheckCircle, className: styles.statusConfirmed },
+  preparing: { label: "Preparing", icon: ChefHat, className: styles.statusPreparing },
+  ready: { label: "Ready", icon: Utensils, className: styles.statusReady },
+  served: { label: "Served", icon: CheckCircle, className: styles.statusServed },
+  completed: { label: "Completed", icon: CheckCircle, className: styles.statusCompleted },
+  cancelled: { label: "Cancelled", icon: Clock, className: styles.statusCancelled },
 };
 
 const mockOrders = [
@@ -60,15 +59,15 @@ function formatTime(date) {
 
 export function RecentOrders() {
   return (
-    <div className="rounded-xl bg-card p-6 shadow-card animate-slide-up">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-lg font-semibold text-card-foreground">Recent Orders</h2>
-        <a href="/orders" className="text-sm font-medium text-primary hover:underline">
+    <div className={styles.card}>
+      <div className={styles.header}>
+        <h2 className={styles.title}>Recent Orders</h2>
+        <a href="/orders" className={styles.viewAll}>
           View all
         </a>
       </div>
 
-      <div className="space-y-4">
+      <div className={styles.ordersList}>
         {mockOrders.map((order, index) => {
           const config = statusConfig[order.status];
           const StatusIcon = config.icon;
@@ -76,16 +75,16 @@ export function RecentOrders() {
           return (
             <div
               key={order.id}
-              className="flex items-center justify-between p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors"
+              className={styles.orderItem}
               style={{ animationDelay: `${index * 50}ms` }}
             >
-              <div className="flex items-center gap-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-background text-sm font-semibold text-foreground">
+              <div className={styles.orderInfo}>
+                <div className={styles.tableNumber}>
                   {order.tableNumber ? `T${order.tableNumber}` : "🛒"}
                 </div>
-                <div>
-                  <p className="font-medium text-card-foreground">{order.id}</p>
-                  <p className="text-sm text-muted-foreground">
+                <div className={styles.orderDetails}>
+                  <h4>{order.id}</h4>
+                  <p>
                     {order.tableNumber ? `Table ${order.tableNumber}` : order.customerName}
                     {" · "}
                     {formatTime(order.createdAt)}
@@ -93,12 +92,12 @@ export function RecentOrders() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-4">
-                <Badge variant="outline" className={cn("gap-1", config.className)}>
-                  <StatusIcon className="h-3 w-3" />
+              <div className={styles.orderActions}>
+                <span className={`${styles.statusBadge} ${config.className}`}>
+                  <StatusIcon className={styles.statusIcon} />
                   {config.label}
-                </Badge>
-                <span className="font-semibold text-card-foreground">
+                </span>
+                <span className={styles.orderTotal}>
                   ${order.total.toFixed(2)}
                 </span>
               </div>
@@ -109,4 +108,3 @@ export function RecentOrders() {
     </div>
   );
 }
-

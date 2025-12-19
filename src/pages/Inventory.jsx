@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { cn } from "@/lib/utils";
+import styles from "./Inventory.module.css";
 
 const mockInventory = [
   { id: "1", name: "Beef Patties", category: "Proteins", quantity: 45, unit: "kg", minStock: 20, lastUpdated: new Date() },
@@ -32,27 +32,27 @@ export default function Inventory() {
   const lowStockItems = mockInventory.filter(item => item.quantity < item.minStock);
 
   return (
-    <div className="space-y-6">
+    <div className={styles.container}>
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-foreground">Inventory</h1>
-          <p className="text-muted-foreground">Track and manage your stock levels.</p>
+      <div className={styles.header}>
+        <div className={styles.headerInfo}>
+          <h1>Inventory</h1>
+          <p>Track and manage your stock levels.</p>
         </div>
-        <Button className="gap-2">
-          <Plus className="h-4 w-4" />
+        <Button className={styles.addButton}>
+          <Plus className={styles.buttonIcon} />
           Add Item
         </Button>
       </div>
 
       {/* Low Stock Alert */}
       {lowStockItems.length > 0 && (
-        <div className="rounded-xl bg-destructive/10 border border-destructive/20 p-4 animate-fade-in">
-          <div className="flex items-center gap-3">
-            <AlertTriangle className="h-5 w-5 text-destructive" />
+        <div className={styles.lowStockAlert}>
+          <div className={styles.alertContent}>
+            <AlertTriangle className={styles.alertIcon} />
             <div>
-              <p className="font-medium text-destructive">Low Stock Alert</p>
-              <p className="text-sm text-muted-foreground">
+              <p className={styles.alertTitle}>Low Stock Alert</p>
+              <p className={styles.alertDescription}>
                 {lowStockItems.length} items are running low: {lowStockItems.map(i => i.name).join(", ")}
               </p>
             </div>
@@ -61,45 +61,40 @@ export default function Inventory() {
       )}
 
       {/* Filters */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex gap-2 overflow-x-auto pb-2">
+      <div className={styles.filters}>
+        <div className={styles.categoryFilters}>
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={cn(
-                "px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200",
-                selectedCategory === category
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-muted text-muted-foreground hover:bg-muted/80"
-              )}
+              className={`${styles.categoryButton} ${selectedCategory === category ? styles.categoryButtonActive : styles.categoryButtonInactive}`}
             >
               {category}
             </button>
           ))}
         </div>
-        <div className="relative w-full sm:w-64">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <div className={styles.searchWrapper}>
+          <Search className={styles.searchIcon} />
           <Input
             placeholder="Search inventory..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-9"
+            className={styles.searchInput}
           />
         </div>
       </div>
 
       {/* Inventory Table */}
-      <div className="rounded-xl bg-card shadow-card overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
+      <div className={styles.tableWrapper}>
+        <div className={styles.tableScroll}>
+          <table className={styles.table}>
             <thead>
-              <tr className="border-b border-border bg-muted/50">
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Item</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Category</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Stock Level</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Quantity</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Status</th>
+              <tr className={styles.tableHeader}>
+                <th className={styles.tableHeaderCell}>Item</th>
+                <th className={styles.tableHeaderCell}>Category</th>
+                <th className={styles.tableHeaderCell}>Stock Level</th>
+                <th className={styles.tableHeaderCell}>Quantity</th>
+                <th className={styles.tableHeaderCell}>Status</th>
               </tr>
             </thead>
             <tbody>
@@ -110,42 +105,44 @@ export default function Inventory() {
                 return (
                   <tr
                     key={item.id}
-                    className="border-b border-border last:border-0 hover:bg-muted/30 transition-colors animate-fade-in"
+                    className={styles.tableRow}
                     style={{ animationDelay: `${index * 30}ms` }}
                   >
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent">
-                          <Package className="h-5 w-5 text-accent-foreground" />
+                    <td className={styles.tableCell}>
+                      <div className={styles.itemCell}>
+                        <div className={styles.itemIcon}>
+                          <Package className={styles.itemIconSvg} />
                         </div>
-                        <span className="font-medium text-card-foreground">{item.name}</span>
+                        <span className={styles.itemName}>{item.name}</span>
                       </div>
                     </td>
-                    <td className="px-6 py-4">
+                    <td className={styles.tableCell}>
                       <Badge variant="outline">{item.category}</Badge>
                     </td>
-                    <td className="px-6 py-4 w-48">
+                    <td className={`${styles.tableCell} ${styles.stockCell}`}>
                       <Progress 
                         value={Math.min(stockPercentage, 100)} 
-                        className={cn("h-2", isLowStock && "[&>div]:bg-destructive")}
+                        className={`${styles.progressBar} ${isLowStock ? styles.progressBarLow : ""}`}
                       />
                     </td>
-                    <td className="px-6 py-4">
-                      <span className="font-medium text-card-foreground">
-                        {item.quantity} {item.unit}
-                      </span>
-                      <span className="text-sm text-muted-foreground ml-2">
-                        (min: {item.minStock})
-                      </span>
+                    <td className={styles.tableCell}>
+                      <div className={styles.quantityCell}>
+                        <span className={styles.quantity}>
+                          {item.quantity} {item.unit}
+                        </span>
+                        <span className={styles.minStock}>
+                          (min: {item.minStock})
+                        </span>
+                      </div>
                     </td>
-                    <td className="px-6 py-4">
+                    <td className={styles.tableCell}>
                       {isLowStock ? (
-                        <Badge className="bg-destructive/10 text-destructive border-0 gap-1">
-                          <TrendingDown className="h-3 w-3" />
+                        <Badge className={`${styles.statusBadge} ${styles.statusBadgeLow}`}>
+                          <TrendingDown className={styles.statusIcon} />
                           Low Stock
                         </Badge>
                       ) : (
-                        <Badge className="bg-success/10 text-success border-0">
+                        <Badge className={`${styles.statusBadge} ${styles.statusBadgeOk}`}>
                           In Stock
                         </Badge>
                       )}
@@ -160,4 +157,3 @@ export default function Inventory() {
     </div>
   );
 }
-

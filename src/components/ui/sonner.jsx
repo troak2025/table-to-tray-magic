@@ -1,17 +1,17 @@
 import { Toaster as Sonner, toast } from "sonner";
+import styles from "./sonner.module.css";
 
 const Toaster = ({ ...props }) => {
   return (
     <Sonner
       theme="light"
-      className="toaster group"
+      className={styles.toaster}
       toastOptions={{
         classNames: {
-          toast:
-            "group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-lg",
-          description: "group-[.toast]:text-muted-foreground",
-          actionButton: "group-[.toast]:bg-primary group-[.toast]:text-primary-foreground",
-          cancelButton: "group-[.toast]:bg-muted group-[.toast]:text-muted-foreground",
+          toast: styles.toast,
+          description: styles.description,
+          actionButton: styles.actionButton,
+          cancelButton: styles.cancelButton,
         },
       }}
       {...props}
